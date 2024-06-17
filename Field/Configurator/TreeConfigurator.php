@@ -23,9 +23,10 @@ final class TreeConfigurator implements FieldConfiguratorInterface
 		$field->setFormTypeOptionIfNotSet('query_builder', static function (EntityRepository $repository) use ($field) {
 			// TODO: should this use `createIndexQueryBuilder` instead, so we get the default ordering etc.?
 			// it would then be identical to the one used in autocomplete action, but it is a bit complex getting it in here
-			$queryBuilder = $repository->createQueryBuilder('entity');
 			if (null !== $queryBuilderCallable = $field->getCustomOption(TreeField::OPTION_QUERY_BUILDER_CALLABLE)) {
-				$queryBuilderCallable($queryBuilder);
+				$queryBuilder = $queryBuilderCallable($repository);
+			} else {
+				$queryBuilder = $repository->createQueryBuilder('entity');
 			}
 
 			return $queryBuilder;

@@ -69,12 +69,9 @@ abstract class TreeCrudController extends AbstractCrudController
 		$queryBuilder = $this->createIndexQueryBuilder($context->getSearch(), $context->getEntity(), $fields, $filters);
 
         $this->doctrine->getManager()->getConfiguration()->addCustomHydrationMode('tree', 'Gedmo\Tree\Hydrator\ORM\TreeObjectHydrator');
-		$queryBuilder->getQuery()
-			->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
-			->getResult("tree");
-		$entities = $queryBuilder->getQuery()
-			->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
-			->getResult();
+		$query = $queryBuilder->getQuery()->setHint(Query::HINT_INCLUDE_META_COLUMNS, true);
+		$query->getResult("tree");
+		$entities = $query->getResult();
         $entities = $this->container->get(EntityFactory::class)->createCollection($context->getEntity(), $entities);
 
 
