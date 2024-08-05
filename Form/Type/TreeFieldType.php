@@ -62,7 +62,7 @@ class TreeFieldType extends AbstractType
             'choice_attr'   => function ($choice, $key, $value) {
                 return ['data-level' => $choice->getLevel(), 'data-has-child' => !$choice->getChildren()->isEmpty()];
             },
-            'placeholder'   => 'umanit.easyadmin.tree.form-field.placeholder',
+//            'placeholder'   => 'umanit.easyadmin.tree.form-field.placeholder',
         ]);
 
     }
