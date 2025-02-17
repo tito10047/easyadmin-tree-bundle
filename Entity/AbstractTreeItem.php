@@ -37,10 +37,7 @@ abstract class AbstractTreeItem
 
 	abstract public function getName(): string;
 
-	public function setName(string $name): static
-    {
-        $this->name = $name;
-    }
+    abstract public function setName(string $name): static;
 
 	public function getRoot(): ?static
     {
